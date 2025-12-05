@@ -41,7 +41,7 @@ class Student:
 
 class TA(Teacher, Student):
     def __init__(self, salary,gpa, name):
-        super().__init__( salary)  #no need to call self
+        super().__init__(salary)  #no need to call self
         Student.__init__(self,gpa) # need to call self
         self.name = name
         
