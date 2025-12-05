@@ -7,7 +7,7 @@ class BankAccount:
     def __init__(self, name, balance, account_no):
         self.name = name #public
         self._account_no = account_no #protected
-        self.__balance = balance #protected
+        self.__balance = balance #private
         
     def get_balance(self):
         return self.__balance
