@@ -11,6 +11,11 @@ class methods
 --> need to use @classmethod as decorator
 
 static methods
+
+--> no compulsory params
+--> no access to instance attr nor class attr
+--> @staticmethod
+
 """
 
 #notes 
@@ -36,7 +41,13 @@ class Laptop:
     def get_storage_type(cls):
         print(f"Storage type is {cls.storage_type}")
         
+    @staticmethod
+    def calculate_discount(price, discount):
+        final_price = price - (discount * price / 100)
+        print("Discounted price : ", final_price)
+        
 
 laptop1 = Laptop("8GB","512GB")
 Laptop.get_storage_type();
 laptop1.get_info()
+laptop1.calculate_discount(40_000, 10)
