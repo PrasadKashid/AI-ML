@@ -1,0 +1,16 @@
+{
+  "profile": {
+    "age": 28,
+    "country": "India",
+    "skills": [
+      {
+        "level": "Intermediate",
+        "name": "Python"
+      },
+      {
+        "level": "Beginner",
+        "name": "React"
+      }
+    ]
+  }
+}
