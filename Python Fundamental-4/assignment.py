@@ -222,31 +222,107 @@
 # Player.players_count()
 
 """
-
+here 
 """
 
 
 # q9
-class Herbivore:
-    def __init__(self):
-        print("Herbivore init")
-        super().__init__()
+# class Herbivore:
+#     def __init__(self):
+#         print("Herbivore init")
+#         super().__init__()
 
-class Carnivore:
-    def __init__(self):
-        print("Carnivore init")
-        super().__init__()
+# class Carnivore:
+#     def __init__(self):
+#         print("Carnivore init")
+#         super().__init__()
 
-class Omnivore:
-    def __init__(self):
-        print("Omnivore init")
-        super().__init__()
+# class Omnivore:
+#     def __init__(self):
+#         print("Omnivore init")
+#         super().__init__()
         
-class Bear(Herbivore, Carnivore, Omnivore):
-    def __init__(self):
-        print("Bear init")
-        super().__init__()
+# class Bear(Herbivore, Carnivore, Omnivore):
+#     def __init__(self):
+#         print("Bear init")
+#         super().__init__()
 
-bear = Bear()
+# bear = Bear()
 
+#q10
+class Message:
+    message_counter = 1
+    def __init__(self,sender, content):
+        self.sender = sender
+        self.content  = content
+        self.id = Message.message_counter
+        Message.message_counter += 1
         
+    def __str__(self):
+        return f"({self.id}) {self.sender.username} : {self.content}"
+    
+class User:
+    def __init__(self, username):
+        self.username = username
+        self.chatroom = None
+        
+    def join_chatroom(self, chatroom):
+        if self.chatroom:
+            print(f"{self.username} is already in a chatroom")
+        else:
+            chatroom.add_users(self)
+            self.chatroom = chatroom
+            print(f"{self.username} joined {self.chatroom.name}")
+
+    def left_chatroom(self):
+        if not self.chatroom:
+            print("Not part of any chatroom")
+        else:
+            self.chatroom.remove_user(self)
+            print(f"{self} has left the {self.chatroom.name}!!")
+            self.chatroom = None
+            
+    def send_message(self,content):
+        if not self.chatroom:
+            print(f"{self.username} cannot send message (not in a chatroom)")
+        else:
+            self.chatroom.broadcast(self, content)
+class Chatroom:
+    def __init__(self, name):
+        self.name= name
+        self.users = []
+        self.messages = []
+        
+    def add_users(self, user):
+        self.users.append(user)
+    
+    def remove_user(self, user):
+        if user in self.users:
+            self.users.remove(user)
+    
+    def broadcast(self, sender, content):
+        message = Message(sender, content)
+        self.messages.append(message)
+        print(message)
+        
+    def show_chat(self):
+        print(f"\nChat history of {self.name}")
+        for msg in self.messages:
+            print(msg)
+
+if __name__ == "__main__":
+    room = Chatroom("Python room")
+    
+    u1 = User("Prasad")
+    u2 = User("Nisha")
+    
+    u1.join_chatroom(room)
+    u2.join_chatroom(room)
+    
+    u1.send_message("hello Nishhh!!!")
+    u2.send_message("Hello Prasaddd!!!")
+    
+    room.show_chat();
+    
+    u1.left_chatroom();
+    u2.left_chatroom()
